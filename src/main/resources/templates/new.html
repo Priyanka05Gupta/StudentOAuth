@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Create New Product</title>
+</head>
+<body>
+	<div align="center">	
+		<h1>Create New Student</h1>
+		<br/>
+		<form action="#" th:action="@{save}" th:object="${student}" method="post">
+			<table border="0" cellpadding="10">
+				<tr>
+					<td>Student Name:</td>
+					<td><input type="text" th:field="*{first_name}" /></td>
+				</tr>
+	<!--		<tr>
+					<td>Mobile No:</td>
+					<td><input type="text" th:field="*{mobile_no}" /></td>
+				</tr>	-->			
+				<tr>
+					<td>Email:</td>
+					<td><input type="text" th:field="*{email}" /></td>
+				</tr>	
+			<!--	<p th:each="project : ${projects}">		
+					<tr>
+						<td>Project Name:</td>
+						<td><input type="text" th:field="*{project.project_name}" /></td>
+					</tr>				
+					<tr>
+						<td>Duration:</td>
+						<td><input type="text" th:field="*{project.duration}" /></td>
+					</tr>	
+				</p>-->
+				<tr>
+					<td>Photo Upload:</td>
+					<td><input type="text" th:field="*{photo_upload}" /></td>
+				</tr>				
+				<tr>
+					<td colspan="2"><button type="submit">Save</button></td>
+				</tr>  
+			</table> 
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Manager</title>
+</head>
+<body>
+<div align="center">	
+	<div sec:authorize="isAuthenticated()">
+		Welcome <b><span sec:authentication="name">Username</span></b>
+		&nbsp;
+		<i><span sec:authentication="principal.authorities">Roles</span></i>
+	</div>
+		
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout" />
+	</form>
+	
+	<h1>Student Details</h1>
+	<div sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN')">
+		<a href="new_student">Create New Student</a>
+	</div>
+	
+	<br/><br/>
+	<table border="1" cellpadding="10">
+		<thead>
+			<tr>
+				<!--<th>Student ID</th>-->
+				<th>Name</th>
+				<th>Mobile No</th>
+				<th>Email</th>
+				<th>Project Name</th>
+				<th>Duration</th> 
+				<th>Photo Upload</th>
+				
+<!--				<th sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">Actions</th>	-->			
+				
+			</tr>
+		</thead>
+				<tbody>
+			<tr th:each="student : ${iterateStud}">
+				<!--<td th:text="${student.student_id}">Product ID</td>-->
+				<td th:text="${student.first_name}"/>
+				<td th:text="${student.mobile_no}"/>
+				<td th:text="${student.email}"/>
+				<p th:each="project : ${student.projects}"> 
+					<td th:text="${project.project_name}"/>
+               		<td th:text="${project.duration}"/>
+				 </p> 
+				<td th:text="${student.photo_upload}"/>
+				
+	<!--		<td sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')">
+					<a th:href="@{'/edit/' + ${student.id}}">Edit</a>			
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<a sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')" th:href="@{'/delete/' + ${student.id}}">Delete</a>
+				</td> -->
+			</tr>
+		</tbody>
+		
+	</table>
+</div>
+</body>
+</html>
